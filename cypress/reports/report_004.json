@@ -1,0 +1,164 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-02-07T13:16:18.933Z",
+    "end": "2022-02-07T13:16:20.650Z",
+    "duration": 1717,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c1e01360-0e66-4074-bb1f-fb0e0e3d5532",
+      "title": "",
+      "fullFile": "cypress/integration/Div_Scripts/API_alias.js",
+      "file": "cypress/integration/Div_Scripts/API_alias.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c1e92306-9e82-4fd3-ba13-66fd56a2c222",
+          "title": "Test the Automation API ALIAS practice",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "validate header",
+              "fullTitle": "Test the Automation API ALIAS practice validate header",
+              "timedOut": null,
+              "duration": 870,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@users').its('headers').its('content-type').should('include', 'application/json; charset=utf-8');",
+              "err": {},
+              "uuid": "cd32f183-354d-4a77-aee9-2dbf217d991a",
+              "parentUUID": "c1e92306-9e82-4fd3-ba13-66fd56a2c222",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "validate status",
+              "fullTitle": "Test the Automation API ALIAS practice validate status",
+              "timedOut": null,
+              "duration": 251,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@users').its('status').should('equal', 200);",
+              "err": {},
+              "uuid": "2e1e35b9-275f-4331-8019-2619121278da",
+              "parentUUID": "c1e92306-9e82-4fd3-ba13-66fd56a2c222",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "validate total pages",
+              "fullTitle": "Test the Automation API ALIAS practice validate total pages",
+              "timedOut": null,
+              "duration": 259,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@users').its('body').should('contain', {\n  'total_pages': 2\n});",
+              "err": {},
+              "uuid": "51cbdcc2-7a3b-407c-a6a6-5b1b1def3555",
+              "parentUUID": "c1e92306-9e82-4fd3-ba13-66fd56a2c222",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "validate user info",
+              "fullTitle": "Test the Automation API ALIAS practice validate user info",
+              "timedOut": null,
+              "duration": 242,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('@users').its('body').then(resp => {\n  expect(resp.data[0]).has.property('email', 'michael.lawson@reqres.in');\n});",
+              "err": {},
+              "uuid": "ad50aeb7-b188-426b-9d6b-7b64e9a069e1",
+              "parentUUID": "c1e92306-9e82-4fd3-ba13-66fd56a2c222",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cd32f183-354d-4a77-aee9-2dbf217d991a",
+            "2e1e35b9-275f-4331-8019-2619121278da",
+            "51cbdcc2-7a3b-407c-a6a6-5b1b1def3555",
+            "ad50aeb7-b188-426b-9d6b-7b64e9a069e1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1622,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "reportFilename": "report",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true
+      },
+      "version": "6.0.1"
+    }
+  }
+}

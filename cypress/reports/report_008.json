@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-02-07T13:16:44.934Z",
+    "end": "2022-02-07T13:16:46.115Z",
+    "duration": 1181,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c7d29451-9028-4afe-914a-2fa39a321399",
+      "title": "",
+      "fullFile": "cypress/integration/Div_Scripts/city.js",
+      "file": "cypress/integration/Div_Scripts/city.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "40268688-9fc3-436e-b7f8-26492dcd890a",
+          "title": "Check the cities",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Get the list of cities",
+              "fullTitle": "Check the cities Get the list of cities",
+              "timedOut": null,
+              "duration": 1133,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: 'https://www.metaweather.com/api/location/search/?query=san'\n}).then(res => {\n  expect(res.body).has.length.greaterThan(10);\n  const city = res.body[0].title;\n  return city;\n}).then(city => {\n  cy.request({\n    method: 'GET',\n    url: 'https://www.metaweather.com/api/location/search/?query=' + city\n  }).then(resp => {\n    expect(resp.status).to.eq(200);\n    expect(resp.body[0]).has.property('location_type', 'City');\n  });\n});",
+              "err": {},
+              "uuid": "7d0760f0-6606-48e0-8c7e-97fbc178e648",
+              "parentUUID": "40268688-9fc3-436e-b7f8-26492dcd890a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7d0760f0-6606-48e0-8c7e-97fbc178e648"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1133,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "reportFilename": "report",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true
+      },
+      "version": "6.0.1"
+    }
+  }
+}

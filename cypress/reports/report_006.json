@@ -1,0 +1,145 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-02-07T13:16:26.190Z",
+    "end": "2022-02-07T13:16:33.154Z",
+    "duration": 6964,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "af5fc92b-438b-4852-8716-4485a7a77be6",
+      "title": "",
+      "fullFile": "cypress/integration/Div_Scripts/API_test.js",
+      "file": "cypress/integration/Div_Scripts/API_test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "908e8abb-28ff-40b4-98a6-4adec8725f11",
+          "title": "Test the Automation API practice",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Get the list of products",
+              "fullTitle": "Test the Automation API practice Get the list of products",
+              "timedOut": null,
+              "duration": 6394,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('https://flask-rest-api-demo.herokuapp.com/product/motorbike').then(resp => {\n  expect(resp.status).equal(200);\n  expect(resp.body.product[0]).has.property('price', 599.99);\n  expect(resp.body.product).has.length(1);\n  expect(resp.body.product[0]).has.property('product', 'motorbike');\n});",
+              "err": {},
+              "uuid": "cfd05748-dc3a-4b89-bf80-dc6d60eccf70",
+              "parentUUID": "908e8abb-28ff-40b4-98a6-4adec8725f11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get the list of Users",
+              "fullTitle": "Test the Automation API practice Get the list of Users",
+              "timedOut": null,
+              "duration": 251,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('https://flask-rest-api-demo.herokuapp.com/users').then(resp => {\n  expect(resp.status).equal(200);\n  expect(resp.body.users[2]).has.property('username', 'test_3');\n  expect(resp.body.users).has.length(5);\n  expect(resp.body.users[4]).has.property('password', 'qwerty');\n  expect(resp.body.users[2]).has.not.property('price');\n});",
+              "err": {},
+              "uuid": "33673d6b-3d01-4d95-aec1-7026cc4aad77",
+              "parentUUID": "908e8abb-28ff-40b4-98a6-4adec8725f11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get the list of Users",
+              "fullTitle": "Test the Automation API practice Get the list of Users",
+              "timedOut": null,
+              "duration": 243,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('https://reqres.in/api/users?page=2').then(resp => {\n  expect(resp.status).equal(200);\n  expect(resp.body).has.property('total', 12);\n  expect(resp.body.data[0]).has.property('first_name', 'Michael');\n  expect(resp.body.data[1]).has.property('first_name', 'Lindsay');\n  expect(resp.body.data).has.length(6);\n});",
+              "err": {},
+              "uuid": "2e9b3717-7be7-4f1c-9e46-577d5982aefc",
+              "parentUUID": "908e8abb-28ff-40b4-98a6-4adec8725f11",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cfd05748-dc3a-4b89-bf80-dc6d60eccf70",
+            "33673d6b-3d01-4d95-aec1-7026cc4aad77",
+            "2e9b3717-7be7-4f1c-9e46-577d5982aefc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6888,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "reportFilename": "report",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true
+      },
+      "version": "6.0.1"
+    }
+  }
+}
