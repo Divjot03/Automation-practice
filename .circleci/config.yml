@@ -1,19 +1,100 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
+# Check https://circleci.com/docs/2.0/ for more details
+# for config.yml syntax see https://circleci.com/docs/2.0/configuration-reference/
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+orbs:
+  # import Cypress orb by specifying an exact version x.y.z
+  # or the latest version 1.x.x using "@1" syntax
+  # https://github.com/cypress-io/circleci-orb
+  cypress: cypress-io/cypress@1.28.0
+
+commands:
+  restore-cached-dependencies:
+    description: restores the NPM cache and the cached Cypress binary
+    steps:
+      # Download and cache dependencies for the app and for tests
+      - restore_cache:
+          keys:
+          - dependencies-{{ checksum "package.json" }}
+          # do not fall back to the previous cache
+          # otherwise we will be "rolling over" previous Cypress binaries
+          # adding newer versions until the cache is huge
+          # we need "cypress cache prune" command
+
+ ##
+  cache-dependencies:
+    description: Save NPM cache and Cypress binary
+    steps:
+      - save_cache:
+          paths:
+            # all NPM modules
+            - ~/.npm
+            # Cypress binary (or yarn dependencies)
+            - ~/.cache
+          key: dependencies-{{ checksum "package.json" }}
+
+  test-answers:
+    description: Runs the answers spec file in the given folder
+    parameters:
+      folder:
+        description: Name of the folder, like "Div_Scripts"
+        type: string
+    steps:
+      # we are running just a single answers file in a particular subfolder here
+      # if you want to run answers in EVERY subfolder at once use command
+      # npx cypress run --spec 'cypress/integration/*/answer.js' --config ignoreTestFiles="",supportFile=cypress/support/reset.js
+      - run: npx cypress run --spec 'cypress/integration/Div_Scripts/city*.js' 
+
+  store-test-artifacts:
+    description: Saves Cypress screenshots and videos
+    steps:
+      - store_artifacts:
+          path: cypress/screenshots
+      - store_artifacts:
+          path: cypress/videos
+
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  # example test job with 2 commands
+  # 1. starts the app in the background
+  # 2. runs the tests in a separate command
+  two-commands:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+      # find Docker image at https://github.com/cypress-io/cypress-docker-images
+      - image: cypress/base:12.14.0
+
+    working_directory: ~/repo
+
     steps:
       - checkout
+      - restore-cached-dependencies 
+      - cache-dependencies
+
+      #
+
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: Run Cypress tests
+          command: npm test
+
+      - store-test-artifacts
+
+  # alternative:
+  #   starts the app and runs tests using a single start-server-and-test command
+  single-command:
+    docker:
+      # find Docker image at https://github.com/cypress-io/cypress-docker-images
+      - image: cypress/base:12.14.0
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore-cached-dependencies
+      - cache-dependencies
+
+    ##
+
+      - run: npx cypress info
+
+      - run:
+          name: Start and test
+          command: npm run ci
